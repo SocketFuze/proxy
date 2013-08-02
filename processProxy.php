@@ -5,7 +5,7 @@ require_once("DatabaseDriver.php");
 
 if(!isset($_POST)) exit(); //TODO change to post
 
-$ipAddress = $_POST['ipaddresss'];
+$ipAddress = $_POST['ipaddress'];
 echo nl2br($ipAddress);
 $ips = explode(" ", trim($ipAddress));
 echo "Vardump on ips\n";
