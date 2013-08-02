@@ -1,3 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	   
+	<title>SocketFuze - Proxy Solution</title>
+	
+	<!-- Styles -->
+	<link rel="stylesheet" href="css/proxy.css">
+	
+	<!-- Base JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	
+	<script src="js/simplejax.js" type="text/javascript"></script>
+	<script src="js/tinysort.js" type="text/javascript"></script>
+	<script src="js/proxy.js" type="text/javascript"></script>
+</head>
+
+<body>
+
 <?php
 
 //connection variables
@@ -20,17 +42,18 @@ $query = mysql_query("SELECT * FROM proxies");
 
 // Display Table
 
-  echo "
-	<table cellpadding=\"2\" cellspacing=\"2\" border=\"0\" width=\"75%\">
-		<tr bgcolor=\"#666666\">
-			<td colspan=\"5\" align=\"center\"><b><font color=\"#FFFFFF\">" . $table[0] . "</font></td>
-		</tr>
-		<tr>
-			<td>IP:Port</td>
-			<td>Country Code</td>
-			<td>Country Name</td>
+	echo "
+	<table id=\"listtable\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"75%\" rel=\"50\">
+		<thead>
+		<tr id=\"theader\">
+			<td>IP Address</td>
+			<td>Port</td>
+			<td>Country</td>
+			<td>Type</td>
+			<td>Anonymity</td>
 			<td>Last Checked</td>
-		</tr>";
+		</tr>
+		</thead>";
 
 	WHILE($rows = mysql_fetch_array($query)):
 	
@@ -38,16 +61,23 @@ $query = mysql_query("SELECT * FROM proxies");
 		$port= $rows['port'];
 		$cCode= $rows['country_code'];
 		$cName= $rows['country_name'];
-		$date = $rows['date'];         
+		$date = $rows['date'];
 		
-		echo "<tr>
-		    <td>" . $ip .':'. $port . "</td>
-		    <td>" . $cCode . "</td>
-		    <td>" . $cName . "</td>
+		$str = strtolower($cCode);
+		
+		echo "<tr class=\"\"  rel=\"13351271\">
+		    <td>" . $ip . "</td>
+		    <td>" . $port . "</td>
+		    <td>" . '<img src="http://static.hidemyass.com/flags/'.$str.'.png" alt="flag" />' . $cName . "</td>
+		    <td>" . 'Type' . "</td>
+		    <td>" . 'Anonymity' . "</td>
 		    <td>" . $date . "</td>
-		</tr>"; 	        
+		</tr>";
         
         endwhile;
         
         echo "</table><br/><br/>";
 ?>
+
+</body>
+</html>
