@@ -13,8 +13,8 @@ print_r($ips);
 foreach($ips as $ip) {
 	echo "in forloop for ip: {$ip} \n";
 	$tmp = explode(":", $ip);
-	$ip = $tmp[0];
-	$port = $tmp[1];
+	$ip = trim($tmp[0]);
+	$port = trim($tmp[1]);
 	if(ProxyChecker::checkProxy($ip, $port)) {
 		$loc = ProxyChecker::getLocation($ipAddress);
 		$ipAddress = mysql_real_escape_string($ipAddress);
