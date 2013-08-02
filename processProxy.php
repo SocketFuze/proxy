@@ -17,6 +17,7 @@ foreach($ips as $ip) {
 	$port = trim($tmp[1]);
 	if(ProxyChecker::checkProxy($ip, $port)) {
 		$loc = ProxyChecker::getLocation($ipAddress); 
+		print_r($loc);
 		$ipAddress = mysql_escape_string($ipAddress); //FIXME: Update to MySQLi
 		$port = mysql_escape_string($port);
 
