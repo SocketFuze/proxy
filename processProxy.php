@@ -7,7 +7,7 @@ if(!isset($_POST)) exit(); //TODO change to post
 
 $ipAddress = $_POST['ipaddresss'];
 echo nl2br($ipAddress);
-$ips = explode("\n", trim($ipAddress));
+$ips = explode(" ", trim($ipAddress));
 echo "Vardump on ips\n";
 print_r($ips);
 foreach($ips as $ip) {
