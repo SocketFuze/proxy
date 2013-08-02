@@ -14,8 +14,8 @@ class DatabaseDriver {
 	/**
 	 * Inserts the proxy into the database
 	 */
-	public function insertProxy($ipAddress, $port, $cCode, $cName, $lastChecked) {
-		$sql = "INSERT INTO proxies VALUES(NULL, '{$ipAddress}', {$port}, '{$cCode}', '{$cName}', '{$lastChecked}')";
+	public function insertProxy($ipAddress, $port, $cCode, $cName, $date) {
+		$sql = "INSERT INTO proxies VALUES(NULL, '{$ipAddress}', {$port}, '{$cCode}', '{$cName}', '{$date}')";
 		echo $sql;
 		mysql_query($sql);
 	}
