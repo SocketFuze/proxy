@@ -42,4 +42,14 @@ class DatabaseDriver {
 		$sql = "DELETE FROM proxies WHERE id = {$id}";
 		mysql_query($sql);
 	}
+	
+	/**
+	 * Checks if there is a duplicate ip and port
+	 * combination
+	 */
+	public function checkDuplicate($ip, $port) {
+		$sql = "SELECT * FROM proxies WHERE IP = '{$ip}' AND PORT = {$port}";
+		$result = mysql_query($sql);
+		return (mysql_num_rows($result) > 0);
+	}
 }
