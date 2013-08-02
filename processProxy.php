@@ -6,9 +6,15 @@ require_once("DatabaseDriver.php");
 if(!isset($_POST)) exit(); //TODO change to post
 
 $ipAddress = $_POST['ipaddresss'];
-$ips = explode("\n", $ipAddress);
+echo nl2br($ipAddress);
+$ips = explode("\n", trim($ipAddress));
+echo "Vardump on ips\n";
+print_r($ips);
 foreach($ips as $ip) {
-	list($ip, $port) = explode(":", $ip);
+	echo "in forloop for ip: {$ip} \n";
+	$tmp = explode(":", $ip);
+	$ip = $tmp[0];
+	$port = $tmp[1];
 	if(ProxyChecker::checkProxy($ip, $port)) {
 		$loc = ProxyChecker::getLocation($ipAddress);
 		$ipAddress = mysql_real_escape_string($ipAddress);
@@ -18,7 +24,7 @@ foreach($ips as $ip) {
 		$db->insertProxy($ip, $port, $loc["countryCode"], $loc["countryName"]);
 		echo "proxy inserted";
 	} else {
-		echo "Proxy Dead";
+		echo "Proxy Dead: {$ip}";
 	}
 }
 
