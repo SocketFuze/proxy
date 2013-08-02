@@ -12,11 +12,45 @@ $last_btn = true;
 $start = $page * $per_page;
 include"db.php";
 
+
+/* -------------------CUSTOM timeAGO------------------------------*/
+function timeAgo($timestamp){
+    $datetime1=new DateTime("now");
+    $datetime2=date_create($timestamp);
+    $diff=date_diff($datetime1, $datetime2);
+    $timemsg='';
+    if($diff->y > 0){
+        $timemsg = $diff->y .' year'. ($diff->y > 1?"'s":'');
+
+    }
+    else if($diff->m > 0){
+     $timemsg = $diff->m . ' month'. ($diff->m > 1?"'s":'');
+    }
+    else if($diff->d > 0){
+     $timemsg = $diff->d .' day'. ($diff->d > 1?"'s":'');
+    }
+    else if($diff->h > 0){
+     $timemsg = $diff->h .' hour'.($diff->h > 1 ? "'s":'');
+    }
+    else if($diff->i > 0){
+     $timemsg = $diff->i .' minute'. ($diff->i > 1?"'s":'');
+    }
+    else if($diff->s > 0){
+     $timemsg = $diff->s .' second'. ($diff->s > 1?"'s":'');
+    }
+
+$timemsg = $timemsg.' ago';
+return $timemsg;
+}
+
+/* --------------------------------------------- */
+
+
 $query_pag_data = "SELECT * FROM proxies LIMIT $start, $per_page";
 $result_pag_data = mysql_query($query_pag_data);
 $msg = "";
 
-  WHILE($rows = mysql_fetch_array($result_pag_data)):
+	WHILE($rows = mysql_fetch_array($result_pag_data)):
 	
 		$ip= $rows['ip'];
 		$port= $rows['port'];
@@ -32,7 +66,7 @@ $msg = "";
 		    <td>" . '<img src="http://static.hidemyass.com/flags/'.$flag.'.png" alt="flag" /> ' . $cName . "</td>
 		    <td>" . 'Type' . "</td>
 		    <td>" . 'Anonymity' . "</td>
-		    <td>" . $date . "</td>
+		    <td>" . timeAgo($date) . "</td>
 		</tr>";
         
     endwhile;
@@ -122,3 +156,4 @@ $msg = $msg . "</ul>" . $goto . $total_string . "</div>";  // Content for pagina
 echo $msg;
 }
 
+?>
