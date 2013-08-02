@@ -5,6 +5,10 @@ require_once("DatabaseDriver.php");
 
 if(!isset($_POST)) exit(); //TODO change to post
 
+// Last Checked Tab Vars
+date_default_timezone_set('America/Los_Angeles');
+$date = date('m/d/Y h:i:s a', time());
+
 $ipAddress = $_POST['ipaddress'];
 echo nl2br($ipAddress);
 $ips = explode("\n", trim($ipAddress));
@@ -23,7 +27,7 @@ foreach($ips as $ip) {
 
 		$db = new DatabaseDriver("localhost", "socket_user", "1a2a3a4a", "socket_proxy");
 		if(!$db->checkDuplicate($ip, $port)) {
-			$db->insertProxy($ip, $port, $loc["countryCode"], $loc["countryName"]);
+			$db->insertProxy($ip, $port, $loc["countryCode"], $loc["countryName"], $date);
 			echo "proxy inserted";
 		} else {
 			echo "Duplicate ip and port found in the database";
