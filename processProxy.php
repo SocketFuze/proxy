@@ -6,7 +6,6 @@ require_once("DatabaseDriver.php");
 if(!isset($_POST)) exit(); //TODO change to post
 
 // Last Checked Tab Vars
-date_default_timezone_set('America/Los_Angeles');
 $date = date('m/d/Y h:i:s a', time());
 
 $ipAddress = $_POST['ipaddress'];
