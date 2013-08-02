@@ -22,8 +22,12 @@ foreach($ips as $ip) {
 		$port = mysql_escape_string($port);
 
 		$db = new DatabaseDriver("localhost", "socket_user", "1a2a3a4a", "socket_proxy");
-		$db->insertProxy($ip, $port, $loc["countryCode"], $loc["countryName"]);
-		echo "proxy inserted";
+		if(!$db->checkDuplicate($ip, $port)) {
+			$db->insertProxy($ip, $port, $loc["countryCode"], $loc["countryName"]);
+			echo "proxy inserted";
+		} else {
+			echo "Duplicate ip and port found in the database";
+		}
 	} else {
 		echo "Proxy Dead: {$ip}";
 	}
