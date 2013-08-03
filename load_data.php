@@ -46,7 +46,7 @@ return $timemsg;
 /* --------------------------------------------- */
 
 
-$query_pag_data = "SELECT * FROM proxies LIMIT $start, $per_page";
+$query_pag_data = "SELECT * FROM proxies ORDER BY id DESC LIMIT $start, $per_page";
 $result_pag_data = mysql_query($query_pag_data);
 $msg = "";
 
