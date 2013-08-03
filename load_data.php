@@ -63,7 +63,7 @@ $msg = "";
     	$msg .= "<tr class=\"\"  rel=\"13351271\">
 		    <td>" . $ip . "</td>
 		    <td>" . $port . "</td>
-		    <td>" . '<img src="http://static.hidemyass.com/flags/'.$flag.'.png" alt="flag" /> ' . $cName . "</td>
+		    <td>" . '<img src="img/flags/'.$flag.'.png" alt="flag" /> ' . $cName . "</td>
 		    <td>" . 'Type' . "</td>
 		    <td>" . 'Anonymity' . "</td>
 		    <td>" . timeAgo($date) . "</td>
